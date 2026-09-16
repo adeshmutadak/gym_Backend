@@ -1,0 +1,11 @@
+C:\Users\AdeshVishnuMutadak\source\repos\Dto\bin\Debug\net10.0\Dto.deps.json
+C:\Users\AdeshVishnuMutadak\source\repos\Dto\bin\Debug\net10.0\Dto.dll
+C:\Users\AdeshVishnuMutadak\source\repos\Dto\bin\Debug\net10.0\Dto.pdb
+C:\Users\AdeshVishnuMutadak\source\repos\Dto\obj\Debug\net10.0\Dto.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\AdeshVishnuMutadak\source\repos\Dto\obj\Debug\net10.0\Dto.AssemblyInfoInputs.cache
+C:\Users\AdeshVishnuMutadak\source\repos\Dto\obj\Debug\net10.0\Dto.AssemblyInfo.cs
+C:\Users\AdeshVishnuMutadak\source\repos\Dto\obj\Debug\net10.0\Dto.csproj.CoreCompileInputs.cache
+C:\Users\AdeshVishnuMutadak\source\repos\Dto\obj\Debug\net10.0\Dto.dll
+C:\Users\AdeshVishnuMutadak\source\repos\Dto\obj\Debug\net10.0\refint\Dto.dll
+C:\Users\AdeshVishnuMutadak\source\repos\Dto\obj\Debug\net10.0\Dto.pdb
+C:\Users\AdeshVishnuMutadak\source\repos\Dto\obj\Debug\net10.0\ref\Dto.dll
