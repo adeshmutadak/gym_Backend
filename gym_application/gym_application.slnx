@@ -1,0 +1,8 @@
+<Solution>
+  <Project Path="../Common/Common.csproj" />
+  <Project Path="../Dto/Dto.csproj" />
+  <Project Path="../Entities/Entities.csproj" />
+  <Project Path="../Repository/Repository.csproj" />
+  <Project Path="../Services/Services.csproj" />
+  <Project Path="gym_application.csproj" />
+</Solution>
