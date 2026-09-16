@@ -1,0 +1,151 @@
+# =====================================================================
+#  Gym application - .NET backend
+#  Place at the repository root: C:\Finalgym\Backend\.gitignore
+# =====================================================================
+
+# ---------------------------------------------------------------------
+# Build results
+# ---------------------------------------------------------------------
+[Bb]in/
+[Oo]bj/
+[Oo]ut/
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+[Ww][Ii][Nn]32/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Ll]og/
+[Ll]ogs/
+artifacts/
+
+# ---------------------------------------------------------------------
+# Visual Studio and Rider user files
+# ---------------------------------------------------------------------
+.vs/
+.vscode/
+.idea/
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.userprefs
+*.sln.docstates
+*.sln.iml
+*.dbmdl
+*.jfm
+
+# ---------------------------------------------------------------------
+# NuGet
+# ---------------------------------------------------------------------
+*.nupkg
+*.snupkg
+**/[Pp]ackages/*
+!**/[Pp]ackages/build/
+project.lock.json
+project.fragment.lock.json
+.nuget/
+
+# ---------------------------------------------------------------------
+# Publish and deployment
+# ---------------------------------------------------------------------
+publish/
+[Pp]ublish[Pp]rofiles/*.pubxml.user
+*.[Pp]ublish.xml
+*.azurePubxml
+*.pubxml
+PublishScripts/
+
+# ---------------------------------------------------------------------
+# Test results
+# ---------------------------------------------------------------------
+[Tt]est[Rr]esult*/
+[Bb]uild[Ll]og.*
+*.VisualState.xml
+TestResult.xml
+coverage*.json
+coverage*.xml
+coverage*.info
+*.coverage
+*.coveragexml
+
+# ---------------------------------------------------------------------
+# Secrets. Commit the template, never the real values.
+# ---------------------------------------------------------------------
+gym_application/appsettings.json
+appsettings.Development.json
+appsettings.Local.json
+appsettings.Production.json
+**/appsettings.*.local.json
+secrets.json
+*.pfx
+*.p12
+*.key
+*.snk
+.env
+.env.*
+
+# Keep the template so a new developer knows what to fill in
+!gym_application/appsettings.template.json
+
+# ---------------------------------------------------------------------
+# Local developer overrides
+# ---------------------------------------------------------------------
+gym_application/Properties/launchSettings.json
+*.csproj.user
+
+# ---------------------------------------------------------------------
+# Runtime files written by the application
+# ---------------------------------------------------------------------
+Uploads/
+wwwroot/uploads/
+*.log
+
+# ---------------------------------------------------------------------
+# Database dumps and backups
+# ---------------------------------------------------------------------
+*.bak
+*.sql.bak
+*.mdf
+*.ldf
+*.ndf
+
+# ---------------------------------------------------------------------
+# Miscellaneous
+# ---------------------------------------------------------------------
+*.cache
+*.tmp
+*.swp
+*~
+ClientBin/
+~$*
+*.dbproj.schemaview
+*.tlog
+*.ilk
+*.meta
+*.obj
+*.iobj
+*.pch
+*.pdb
+*.ipdb
+*.pgc
+*.pgd
+*.rsp
+*.sbr
+*.tli
+*.tlh
+*.tmp_proj
+*_wpftmp.csproj
+
+# ---------------------------------------------------------------------
+# Operating system
+# ---------------------------------------------------------------------
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
