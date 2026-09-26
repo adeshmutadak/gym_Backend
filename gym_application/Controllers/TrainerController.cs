@@ -2,6 +2,7 @@
 using CommonLayer.CommonResponse;
 using Dto.Request;
 using Dto.Response;
+using gym_application.Filters;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Services;
@@ -39,12 +40,14 @@ namespace gym_application.Controllers
         /// <summary>Any trainer's profile, by user id. Admin only.</summary>
         [HttpGet("profile/{userId:int}")]
         [Authorize(Policy = "AdminOnly")]
+        [ApiKey]
         public async Task<GeneralResponse<TrainerProfileResponse>> GetProfile(int userId)
             => await _trainerService.GetProfile(userId);
 
         /// <summary>All trainers. Admin only.</summary>
         [HttpGet("all")]
         [Authorize(Policy = "AdminOnly")]
+        [ApiKey]
         public async Task<GeneralResponse<List<TrainerProfileResponse>>> GetAll()
             => await _trainerService.GetAll();
 
@@ -58,6 +61,7 @@ namespace gym_application.Controllers
         /// <summary>Admin updates any trainer's profile.</summary>
         [HttpPut("profile/{userId:int}")]
         [Authorize(Policy = "AdminOnly")]
+        [ApiKey]
         public async Task<GeneralResponse<TrainerProfileResponse>> UpdateProfile(
             int userId, UpdateTrainerProfileRequest request)
             => await _trainerService.UpdateProfile(request, userId, callerIsAdmin: true);

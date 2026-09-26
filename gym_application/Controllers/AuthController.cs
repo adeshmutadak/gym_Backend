@@ -2,6 +2,7 @@
 using CommonLayer.CommonResponse;
 using Dto.Request;
 using Dto.Response;
+using gym_application.Filters;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
@@ -22,12 +23,14 @@ namespace gym_application.Controllers
         /// <summary>API 1 - Admin login. Returns a token with the Admin role.</summary>
         [HttpPost("admin-login")]
         [AllowAnonymous]
+        [ApiKey]
         public GeneralResponse<LoginResponse> AdminLogin(AdminLoginRequest request)
             => _authService.AdminLogin(request);
 
         /// <summary>API 2 - Admin adds a customer or trainer. Requires the Admin token.</summary>
         [HttpPost("add-user")]
         [Authorize(Policy = "AdminOnly")]
+        [ApiKey]
         public async Task<GeneralResponse<RegistrationResponse>> AddUser(RegistrationRequestDto request)
             => await _authService.AddUser(request);
 

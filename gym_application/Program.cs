@@ -1,6 +1,7 @@
 using System.Text;
 using Common.Options;
 using CommonLayer.SecurityHelper;
+using gym_application.Filters;
 using gym_application.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
@@ -11,20 +12,28 @@ using Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// ---------------------------------------------------------------------
 // Configuration
+// ---------------------------------------------------------------------
 builder.Services.Configure<AdminAccountOptions>(
     builder.Configuration.GetSection(AdminAccountOptions.Section));
 builder.Services.Configure<JwtOptions>(
     builder.Configuration.GetSection(JwtOptions.Section));
+builder.Services.Configure<ApiKeyOptions>(
+    builder.Configuration.GetSection(ApiKeyOptions.Section));
 
+// ---------------------------------------------------------------------
 // Database
+// ---------------------------------------------------------------------
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
-    ?? throw new InvalidOperationException("ConnectionStrings:GymDb is not configured.");
+    ?? throw new InvalidOperationException("ConnectionStrings:DefaultConnection is not configured.");
 
 builder.Services.AddDbContext<GymDbContext>(options =>
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
+// ---------------------------------------------------------------------
 // Authentication
+// ---------------------------------------------------------------------
 var jwt = builder.Configuration.GetSection(JwtOptions.Section).Get<JwtOptions>()!;
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -48,20 +57,25 @@ builder.Services.AddAuthorizationBuilder()
     .AddPolicy("TrainerOnly", p => p.RequireRole("Trainer"))
     .AddPolicy("ClientOnly", p => p.RequireRole("Client"));
 
+// ---------------------------------------------------------------------
 // Services
+// ---------------------------------------------------------------------
 builder.Services.AddScoped<ISecurityHelper, SecurityHelper>();
 builder.Services.AddScoped<IAuthRepo, AuthRepo>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<ITrainerRepo, TrainerRepo>();
 builder.Services.AddScoped<ITrainerService, TrainerService>();
 
+// ---------------------------------------------------------------------
 // Controllers and Swagger
+// ---------------------------------------------------------------------
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
 {
     options.SwaggerDoc("v1", new OpenApiInfo { Title = "Gym App API", Version = "v1" });
 
+    // Bearer token: used by Admin, Trainer and Client endpoints
     options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
         Name = "Authorization",
@@ -82,10 +96,25 @@ builder.Services.AddSwaggerGen(options =>
             Array.Empty<string>()
         }
     });
+
+    // X-API-KEY: added per operation by ApiKeyOperationFilter,
+    // so it appears only on actions marked [ApiKey].
+    options.AddSecurityDefinition("ApiKey", new OpenApiSecurityScheme
+    {
+        Name = "X-API-KEY",
+        Type = SecuritySchemeType.ApiKey,
+        In = ParameterLocation.Header,
+        Description = "Admin API key. Required only on Admin endpoints."
+    });
+
+    options.OperationFilter<ApiKeyOperationFilter>();
 });
 
 var app = builder.Build();
 
+// ---------------------------------------------------------------------
+// Pipeline
+// ---------------------------------------------------------------------
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
